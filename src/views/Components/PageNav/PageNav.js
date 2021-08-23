@@ -15,17 +15,21 @@ import Sidebar from "components/Sidebar/Sidebar.js";
 
 
 import routes from "routes.js";
+import orderRoutes from "ordersRoutes";
 
 import styles from "assets/jss/material-dashboard-react/layouts/adminStyle.js";
 
-import bgImage from "assets/img/sidebar-1.jpg";
+import bgImage from "assets/img/sidebar-2.jpeg";
 import logo from "assets/img/reactlogo.png";
+import { useRouteName } from "hooks";
 
 let ps;
 
+const allRoutes = routes.concat(orderRoutes)
+
 const switchRoutes = (
   <Switch>
-    {routes.map((prop, key) => {
+    {allRoutes.map((prop, key) => {
       if (prop.layout === "/Dashboard") {
         return (
           <Route
@@ -37,6 +41,7 @@ const switchRoutes = (
       }
       return null;
     })}
+    
     {/* <Redirect from="/admin" to="/admin/dashboard" /> */}
   </Switch>
 );
@@ -51,7 +56,7 @@ export default function Admin({ ...rest }) {
   // states and functions
   const [mobileOpen, setMobileOpen] = React.useState(false);
   
-  
+  const routeName = useRouteName();
   
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -94,9 +99,13 @@ export default function Admin({ ...rest }) {
         color="green"
         {...rest}
       />
-      <div className={classes.mainPanel} ref={mainPanel}>
+      
+
+      <div className={classes.mainPanel} ref={mainPanel} >
+        
         <Navbar
-          routes={routes}
+        currentRoute = {routeName}
+          routes={allRoutes}
           handleDrawerToggle={handleDrawerToggle}
           {...rest}
         />
@@ -108,8 +117,7 @@ export default function Admin({ ...rest }) {
         ) : (
           <div className={classes.map}>{switchRoutes}</div>
         )}
-        
-      </div>
+        </div>
     </div>
   );
 }

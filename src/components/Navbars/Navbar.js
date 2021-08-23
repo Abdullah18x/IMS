@@ -7,16 +7,16 @@ import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import IconButton from "@material-ui/core/IconButton";
 import Hidden from "@material-ui/core/Hidden";
-import Divider from "@material-ui/core/Divider";
+// import Divider from "@material-ui/core/Divider";
 // @material-ui/icons
 import Menu from "@material-ui/icons/Menu";
 // core components
 import AdminNavbarLinks from "./AdminNavbarLinks.js";
 // import RTLNavbarLinks from "./RTLNavbarLinks.js";
-import Button from "components/CustomButtons/Button.js";
+// import Button from "components/CustomButtons/Button.js";
 
 //hooks
-import { useRouteName } from "hooks";
+// import { useRouteName } from "hooks";
 
 import styles from "assets/jss/material-dashboard-react/components/headerStyle.js";
 
@@ -24,7 +24,7 @@ const useStyles = makeStyles(styles);
 
 export default function Header(props) {
   const classes = useStyles();
-  const routeName = useRouteName();
+  // const routeName = useRouteName();
   const { color } = props;
   const appBarClasses = classNames({
     [" " + classes[color]]: color,
@@ -35,9 +35,10 @@ export default function Header(props) {
         {/* <h3 style={{ marginLeft: "30px" }}>Management System</h3> */}
         <div className={classes.flex}>
           {/* Here we create navbar brand, based on route name */}
-          <Button color="transparent" href="#" className={classes.title}>
-            {routeName}
-          </Button>
+          {/* <Button color="transparent" href="#" className={classes.title}>
+            {props.currentRoute}
+          </Button> */}
+          <span className={classes.title}>Dashboard</span>
         </div>
         <Hidden smDown implementation="css">
           <AdminNavbarLinks />
@@ -52,12 +53,12 @@ export default function Header(props) {
           </IconButton>
         </Hidden>
       </Toolbar>
-      <Divider dark />
     </AppBar>
   );
 }
 
 Header.propTypes = {
+  currentRoute: PropTypes.string,
   color: PropTypes.oneOf(["primary", "info", "success", "warning", "danger"]),
   rtlActive: PropTypes.bool,
   handleDrawerToggle: PropTypes.func,

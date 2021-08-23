@@ -197,10 +197,10 @@ export default function AdminNavbarLinks() {
                       onClick={handleCloseProfile}
                       className={classes.dropdownItem}
                       onMouseEnter={(e) =>
-                        (e.target.style.backgroundColor = "green")
+                        (e.target.style.backgroundColor = "#4caf50")
                       }
                       onMouseLeave={(e) =>
-                        (e.target.style.backgroundColor = "#ffffff")
+                        (e.target.style.backgroundColor = "#ffffff00")
                       }
                     >
                       Profile
@@ -209,10 +209,10 @@ export default function AdminNavbarLinks() {
                       onClick={handleCloseProfile}
                       className={classes.dropdownItem}
                       onMouseEnter={(e) =>
-                        (e.target.style.backgroundColor = "green")
+                        (e.target.style.backgroundColor = "#4caf50")
                       }
                       onMouseLeave={(e) =>
-                        (e.target.style.backgroundColor = "#ffffff")
+                        (e.target.style.backgroundColor = "#ffffff00")
                       }
                     >
                       Settings
@@ -222,10 +222,10 @@ export default function AdminNavbarLinks() {
                       onClick={handleCloseProfile}
                       className={classes.dropdownItem}
                       onMouseEnter={(e) =>
-                        (e.target.style.backgroundColor = "green")
+                        (e.target.style.backgroundColor = "#4caf50")
                       }
                       onMouseLeave={(e) =>
-                        (e.target.style.backgroundColor = "#ffffff")
+                        (e.target.style.backgroundColor = "#ffffff00")
                       }
                     >
                       Logout
