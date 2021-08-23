@@ -2,14 +2,8 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable prettier/prettier */
 import React from "react";
-import GridContainer from "components/Grid/GridContainer.js";
-import GridItem from "components/Grid/GridItem.js";
 import { makeStyles } from "@material-ui/core/styles";
-import Card from "react-bootstrap/Card";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import AllOrdersT from "../Default/Default"
-// import Icon from "@material-ui/core/Icon";
+import Completed from "../Default/Default"
 
 import styles from "assets/jss/material-dashboard-react/views/dashboardStyle.js";
 
@@ -24,7 +18,7 @@ const useCustomStyles = makeStyles({
 export default function AllOrders() {
   const classes = useStyles();
   const classes2 = useCustomStyles();
-  let heads=['#','User','Order Number','Product','Customer Email','Market','Create Date', 'Status', 'Action']
+  let heads=['#','User','Order Number','Product','Customer Email','Market','Update Date', 'Status', 'Action']
   let data=[
     {
       no:'1',
@@ -41,7 +35,7 @@ export default function AllOrders() {
       no:'2',
       User:'Abdullah',
       orderNumber:'114-4507983-9321039',
-      Product:'apple-icon.png',
+      Product:'profile-bg.jpg',
       customerEmail:'abcd@gmail.com',
       market:'USA',
       createDate:'23 june', 
@@ -50,8 +44,8 @@ export default function AllOrders() {
     }
   ]
   return (
-    <AllOrdersT 
-    page="All"
+    <Completed 
+    page="Completed"
       tHeads={heads}
       tData={data}
     />

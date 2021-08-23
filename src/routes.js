@@ -1,25 +1,10 @@
 /* eslint-disable no-unused-vars */
 import Dashboard from "@material-ui/icons/Dashboard";
 import ShoppingCart from "@material-ui/icons/ShoppingCart";
-// import Person from "@material-ui/icons/Person";
-// import LibraryBooks from "@material-ui/icons/LibraryBooks";
-// import BubbleChart from "@material-ui/icons/BubbleChart";
-// import LocationOn from "@material-ui/icons/LocationOn";
-// import Notifications from "@material-ui/icons/Notifications";
-// import Unarchive from "@material-ui/icons/Unarchive";
-// import Language from "@material-ui/icons/Language";
-// core components/views for Admin layout
 import DashboardPage from "views/Dashboard/Dashboard.js";
-// import AllOrdersPage from "views/AllOrders/AllOrders.js";
-// import UserProfile from "views/UserProfile/UserProfile.js";
-// import TableList from "views/TableList/TableList.js";
-// import Typography from "views/Typography/Typography.js";
-// import Icons from "views/Icons/Icons.js";
-// import Maps from "views/Maps/Maps.js";
-// import NotificationsPage from "views/Notifications/Notifications.js";
-// import UpgradeToPro from "views/UpgradeToPro/UpgradeToPro.js";
-// // core components/views for RTL layout
-// import RTLPage from "views/RTLPage/RTLPage.js";
+import orderRoutes from "ordersRoutes";
+import productsRoutes from "productsRoutes";
+import { EventNote } from "@material-ui/icons";
 
 const dashboardRoutes = [
   {
@@ -33,71 +18,14 @@ const dashboardRoutes = [
     name: "Orders",
     icon: ShoppingCart,
     dropDown: true,
+    routes: orderRoutes,
   },
-  // {
-  //   path: "/user",
-  //   name: "User Profile",
-  //   rtlName: "ملف تعريفي للمستخدم",
-  //   icon: Person,
-  //   component: UserProfile,
-  //   layout: "/admin",
-  // },
-  // {
-  //   path: "/table",
-  //   name: "Table List",
-  //   rtlName: "قائمة الجدول",
-  //   icon: "content_paste",
-  //   component: TableList,
-  //   layout: "/admin",
-  // },
-  // {
-  //   path: "/typography",
-  //   name: "Typography",
-  //   rtlName: "طباعة",
-  //   icon: LibraryBooks,
-  //   component: Typography,
-  //   layout: "/admin",
-  // },
-  // {
-  //   path: "/icons",
-  //   name: "Icons",
-  //   rtlName: "الرموز",
-  //   icon: BubbleChart,
-  //   component: Icons,
-  //   layout: "/admin",
-  // },
-  // {
-  //   path: "/maps",
-  //   name: "Maps",
-  //   rtlName: "خرائط",
-  //   icon: LocationOn,
-  //   component: Maps,
-  //   layout: "/admin",
-  // },
-  // {
-  //   path: "/notifications",
-  //   name: "Notifications",
-  //   rtlName: "إخطارات",
-  //   icon: Notifications,
-  //   component: NotificationsPage,
-  //   layout: "/admin",
-  // },
-  // {
-  //   path: "/rtl-page",
-  //   name: "RTL Support",
-  //   rtlName: "پشتیبانی از راست به چپ",
-  //   icon: Language,
-  //   component: RTLPage,
-  //   layout: "/rtl",
-  // },
-  // {
-  //   path: "/upgrade-to-pro",
-  //   name: "Upgrade To PRO",
-  //   rtlName: "التطور للاحترافية",
-  //   icon: Unarchive,
-  //   component: UpgradeToPro,
-  //   layout: "/admin",
-  // },
+  {
+    name: "Products",
+    icon: EventNote,
+    dropDown: true,
+    routes: productsRoutes,
+  },
 ];
 
 export default dashboardRoutes;

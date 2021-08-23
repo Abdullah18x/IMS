@@ -3,7 +3,6 @@ import React from "react";
 import classNames from "classnames";
 import PropTypes from "prop-types";
 import { NavLink, useLocation } from "react-router-dom";
-import orderRoutes from "ordersRoutes";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
@@ -12,12 +11,7 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import Icon from "@material-ui/core/Icon";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
 import Collapse from "@material-ui/core/Collapse";
-import InboxIcon from "@material-ui/icons/MoveToInbox";
-import ExpandLess from "@material-ui/icons/ExpandLess";
-import ExpandMore from "@material-ui/icons/ExpandMore";
-import StarBorder from "@material-ui/icons/StarBorder";
 // core components
 import AdminNavbarLinks from "components/Navbars/AdminNavbarLinks.js";
 import RTLNavbarLinks from "components/Navbars/RTLNavbarLinks.js";
@@ -27,15 +21,19 @@ import styles from "assets/jss/material-dashboard-react/components/sidebarStyle.
 const useStyles = makeStyles(styles);
 
 export default function Sidebar(props) {
-  const [open, setOpen] = React.useState(false);
+  const [selectedIndex, setSelectedIndex] = React.useState("");
   const classes = useStyles();
   let location = useLocation();
   // verifies if routeName is the one active (in browser input)
   function activeRoute(routeName) {
     return location.pathname === routeName;
   }
-  const handleClick = () => {
-    setOpen(!open);
+  const handleClick = (index) => {
+    if (selectedIndex === index) {
+      setSelectedIndex("");
+    } else {
+      setSelectedIndex(index);
+    }
   };
   const { color, logo, image, logoText, routes } = props;
   var links = (
@@ -56,7 +54,9 @@ export default function Sidebar(props) {
             <ListItem
               button
               className={classes.itemLink + listItemClasses}
-              onClick={handleClick}
+              onClick={() => {
+                handleClick(key);
+              }}
             >
               {typeof prop.icon === "string" ? (
                 <Icon
@@ -84,8 +84,13 @@ export default function Sidebar(props) {
               {/* {open ? <span class="fas fa-chevron-up"></span> : <span class="fas fa-chevron-down"></span>} */}
             </ListItem>
 
-            <Collapse in={open} timeout="auto" unmountOnExit>
-              {orderRoutes.map((prop2, key2) => {
+            <Collapse
+              in={key === selectedIndex}
+              timeout="auto"
+              unmountOnExit
+              style={{ paddingLeft: "20px" }}
+            >
+              {prop.routes.map((prop2, key2) => {
                 var listItemClasses2;
 
                 listItemClasses2 = classNames({

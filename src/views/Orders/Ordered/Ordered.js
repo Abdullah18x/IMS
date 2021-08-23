@@ -8,27 +8,52 @@ import { makeStyles } from "@material-ui/core/styles";
 import Card from "react-bootstrap/Card";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import Ordered from "../Default/Default"
 // import Icon from "@material-ui/core/Icon";
 
 import styles from "assets/jss/material-dashboard-react/views/dashboardStyle.js";
 
-const useStyles = makeStyles(
-  styles
-  );
-  const useCustomStyles = makeStyles({
-    rowStyle:{
-      width: "100%", 
-      marginBottom:"1%",
-    }
-  })
-export default function Dashboard() {
+const useStyles = makeStyles(styles);
+const useCustomStyles = makeStyles({
+  a1:{
+    marginRight: 0,
+    marginLeft: 0,
+    width:'100% !important'
+  }
+});
+export default function AllOrders() {
   const classes = useStyles();
   const classes2 = useCustomStyles();
+  let heads=['#','User','Order Number','Product','Customer Email','Market','Create Date', 'Status', 'Action']
+  let data=[
+    {
+      no:'1',
+      User:'Abdullah',
+      orderNumber:'114-4507983-9321039',
+      Product:'apple-icon.png',
+      customerEmail:'abcd@gmail.com',
+      market:'USA',
+      createDate:'23 june', 
+      status:'available', 
+
+    },
+    {
+      no:'2',
+      User:'Abdullah',
+      orderNumber:'114-4507983-9321039',
+      Product:'profile-bg.jpg',
+      customerEmail:'abcd@gmail.com',
+      market:'USA',
+      createDate:'23 june', 
+      status:'available', 
+
+    }
+  ]
   return (
-    <div>
-      <GridContainer>
-       <h1>Ordered</h1>
-      </GridContainer>
-    </div>
+    <Ordered 
+    page="Ordered"
+      tHeads={heads}
+      tData={data}
+    />
   );
 }

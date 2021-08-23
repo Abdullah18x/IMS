@@ -16,6 +16,7 @@ import Sidebar from "components/Sidebar/Sidebar.js";
 
 import routes from "routes.js";
 import orderRoutes from "ordersRoutes";
+import productsRoutes from "productsRoutes";
 
 import styles from "assets/jss/material-dashboard-react/layouts/adminStyle.js";
 
@@ -25,7 +26,7 @@ import { useRouteName } from "hooks";
 
 let ps;
 
-const allRoutes = routes.concat(orderRoutes)
+const allRoutes = routes.concat(orderRoutes).concat(productsRoutes)
 
 const switchRoutes = (
   <Switch>

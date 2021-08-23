@@ -11,16 +11,16 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Table from "react-bootstrap/Table";
 import Image from "react-bootstrap/Image";
+import Button from "react-bootstrap/Button";
 import SearchBar from "material-ui-search-bar";
 import { Link } from "react-router-dom";
-import image from'../../../assets/img/apple-icon.png'
+import InputLabel from "@material-ui/core/InputLabel";
+import MenuItem from "@material-ui/core/MenuItem";
+import FormHelperText from "@material-ui/core/FormHelperText";
+import FormControl from "@material-ui/core/FormControl";
+import Select from "@material-ui/core/Select";
 
 // import Icon from "@material-ui/core/Icon";
-
-import styles from "assets/jss/material-dashboard-react/views/dashboardStyle.js";
-import AllOrders from "../AllOrders/AllOrders";
-import { propTypes } from "react-bootstrap/esm/Image";
-
 
 // const useStyles = makeStyles(styles);
 const useCustomStyles = makeStyles({
@@ -37,10 +37,24 @@ const useCustomStyles = makeStyles({
   fullWidth: {
     width: "100%",
   },
+  tableData: {
+    whiteSpace: "nowrap",
+    maxWidth: "60px",
+    textOverflow: "ellipsis",
+    overflow: "hidden",
+  },
+  formControl: {
+    width: "100%",
+    marginTop: "2%",
+  },
 });
+
+let markets = ["a1", "a2", "a3", "a4", "a5", "a6", "a7", "a8"];
+
 export default function DefaultOrderTemplate(props) {
   //   const classes = useStyles();
   const [searched, setSearched] = useState("");
+  const [market, setMarket] = React.useState("");
   const { tHeads, tData, page } = props;
   const classes = useCustomStyles();
   const requestSearch = (searchedVal) => {
@@ -54,12 +68,16 @@ export default function DefaultOrderTemplate(props) {
     setSearched("");
     requestSearch(searched);
   };
+
+  const handleChange = (event) => {
+    setMarket(event.target.value);
+  };
   return (
     <GridContainer>
       <Row className={"page-header no-gutters " + classes.a2}>
         <Col xs={12} sm={4} className="col-12 col-sm-8 text-sm-left mb-0">
           <h3 style={{ marginTop: "0px" }} className="page-title">
-            Orders Overview : {props.page}
+            Products Overview : {props.page}
           </h3>
         </Col>
       </Row>
@@ -90,16 +108,49 @@ export default function DefaultOrderTemplate(props) {
             />
           </Col>
         </Row>
+        <Row className={classes.fullWidth}>
+          <Col md={12}>
+            <FormControl variant="filled" className={classes.formControl}>
+              <InputLabel id="demo-simple-select-filled-label">
+                Market
+              </InputLabel>
+              <Select
+                labelId="demo-simple-select-filled-label"
+                id="demo-simple-select-filled"
+                value={market}
+                onChange={handleChange}
+              >
+                <MenuItem value="">
+                  <em>None</em>
+                </MenuItem>
+                {markets.map((prop, key) => {
+                  return (
+                    <MenuItem key={key} value={prop}>
+                      {prop}
+                    </MenuItem>
+                  );
+                })}
+              </Select>
+            </FormControl>
+          </Col>
+        </Row>
         <Row style={{ marginTop: "2%" }}>
           <Col>
             <Card>
               <div className={"card-header border-bottom"}>
-                <h4 className="m-0">Active Orders</h4>
+                <h4 className="m-0">Active Products</h4>
               </div>
               {tData === undefined || tData === null ? (
                 <h3>No Data Found</h3>
               ) : (
-                <Table striped bordered hover responsive size="sm" style={{textAlign:"center"}}>
+                <Table
+                  striped
+                  bordered
+                  hover
+                  responsive
+                  size="sm"
+                  style={{ textAlign: "center" }}
+                >
                   <thead>
                     <tr>
                       {tHeads.map((value, key) => {
@@ -117,14 +168,24 @@ export default function DefaultOrderTemplate(props) {
                             return prop2.toLowerCase().includes("jpeg") ||
                               prop2.toLowerCase().includes("jpg") ||
                               prop2.toLowerCase().includes("png") ? (
-                                <td style={{textAlign:"center"}}>
-                                  <Image src={`../imgs/${prop2}`} rounded  style={{width:"50px", height:"50px"}}/>
-                                </td>
-                              
+                              <td style={{ textAlign: "center" }}>
+                                <Image
+                                  src={`../imgs/${prop2}`}
+                                  rounded
+                                  style={{ width: "50px", height: "50px" }}
+                                />
+                              </td>
                             ) : (
-                              <td key={key}>{prop2}</td>
+                              <td className={classes.tableData} key={key}>
+                                {prop2}
+                              </td>
                             );
                           })}
+                          <td>
+                            <Button size="sm" variant="success">
+                              Reserve Now
+                            </Button>{" "}
+                          </td>
                           <td>
                             <Link
                               className="btn btn-success btn-sm"
@@ -135,7 +196,6 @@ export default function DefaultOrderTemplate(props) {
                             >
                               View
                             </Link>
-                            {/* <Button size="sm" variant="success">Success</Button>{" "} */}
                           </td>
                         </tr>
                       );
@@ -154,5 +214,5 @@ export default function DefaultOrderTemplate(props) {
 DefaultOrderTemplate.propTypes = {
   tHeads: PropTypes.arrayOf(PropTypes.string),
   tData: PropTypes.arrayOf(PropTypes.object),
-  page: PropTypes.string
+  page: PropTypes.string,
 };
