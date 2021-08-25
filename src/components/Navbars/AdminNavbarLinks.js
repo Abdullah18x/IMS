@@ -18,6 +18,7 @@ import Person from "@material-ui/icons/Person";
 // core components
 // import CustomInput from "components/CustomInput/CustomInput.js";
 import Button from "components/CustomButtons/Button.js";
+import { NavLink } from "react-router-dom";
 
 import styles from "assets/jss/material-dashboard-react/components/headerLinksStyle.js";
 
@@ -193,19 +194,21 @@ export default function AdminNavbarLinks() {
               <Paper>
                 <ClickAwayListener onClickAway={handleCloseProfile}>
                   <MenuList role="menu">
-                    <MenuItem
-                      onClick={handleCloseProfile}
-                      className={classes.dropdownItem}
-                      onMouseEnter={(e) =>
-                        (e.target.style.backgroundColor = "#4caf50")
-                      }
-                      onMouseLeave={(e) =>
-                        (e.target.style.backgroundColor = "#ffffff00")
-                      }
-                    >
-                      Profile
-                    </MenuItem>
-                    <MenuItem
+                    <NavLink to="/Dashboard/profile">
+                      <MenuItem
+                        className={classes.dropdownItem}
+                        onMouseEnter={(e) =>
+                          (e.target.style.backgroundColor = "#4caf50")
+                        }
+                        onMouseLeave={(e) =>
+                          (e.target.style.backgroundColor = "#ffffff00")
+                        }
+                      >
+                        View Profile
+                      </MenuItem>
+                    </NavLink>
+
+                    {/* <MenuItem
                       onClick={handleCloseProfile}
                       className={classes.dropdownItem}
                       onMouseEnter={(e) =>
@@ -216,7 +219,7 @@ export default function AdminNavbarLinks() {
                       }
                     >
                       Settings
-                    </MenuItem>
+                    </MenuItem> */}
                     <Divider light />
                     <MenuItem
                       onClick={handleCloseProfile}

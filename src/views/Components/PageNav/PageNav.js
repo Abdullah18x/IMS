@@ -13,10 +13,14 @@ import Navbar from "components/Navbars/Navbar.js";
 import Footer from "components/Footer/Footer.js";
 import Sidebar from "components/Sidebar/Sidebar.js";
 
+import Profile from "../../Profile/Profile";
+import OrderSingle from "../../Orders/OrderSingle/OrderSingle";
+import ProductSingle from "../../Products/ProductSingle/ProductSingle";
 
 import routes from "routes.js";
 import orderRoutes from "ordersRoutes";
 import productsRoutes from "productsRoutes";
+import reservationsRoutes from "reservationsRoutes";
 
 import styles from "assets/jss/material-dashboard-react/layouts/adminStyle.js";
 
@@ -26,7 +30,10 @@ import { useRouteName } from "hooks";
 
 let ps;
 
-const allRoutes = routes.concat(orderRoutes).concat(productsRoutes)
+const allRoutes = routes
+  .concat(orderRoutes)
+  .concat(productsRoutes)
+  .concat(reservationsRoutes);
 
 const switchRoutes = (
   <Switch>
@@ -42,7 +49,10 @@ const switchRoutes = (
       }
       return null;
     })}
-    
+    <Route path="/Dashboard/profile" component={Profile} />
+    <Route path="/Dashboard/orderPage" component={OrderSingle} />
+    <Route path="/Dashboard/productPage" component={ProductSingle} />
+
     {/* <Redirect from="/admin" to="/admin/dashboard" /> */}
   </Switch>
 );
@@ -56,9 +66,9 @@ export default function Admin({ ...rest }) {
   const mainPanel = React.createRef();
   // states and functions
   const [mobileOpen, setMobileOpen] = React.useState(false);
-  
+
   const routeName = useRouteName();
-  
+
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
@@ -100,12 +110,10 @@ export default function Admin({ ...rest }) {
         color="green"
         {...rest}
       />
-      
 
-      <div className={classes.mainPanel} ref={mainPanel} >
-        
+      <div className={classes.mainPanel} ref={mainPanel}>
         <Navbar
-        currentRoute = {routeName}
+          currentRoute={routeName}
           routes={allRoutes}
           handleDrawerToggle={handleDrawerToggle}
           {...rest}
@@ -118,7 +126,7 @@ export default function Admin({ ...rest }) {
         ) : (
           <div className={classes.map}>{switchRoutes}</div>
         )}
-        </div>
+      </div>
     </div>
   );
 }
