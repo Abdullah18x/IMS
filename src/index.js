@@ -21,7 +21,7 @@ ReactDOM.render(
       <Route path="/landing-page" component={LandingPage} />
       <Route path="/profile-page" component={ProfilePage} />
       <Route path="/components" component={Components} />
-      <Route path="/Dashboard" component={PageNav} />
+      <Route path="/pmm" component={PageNav} />
       <Route path="/" component={LoginPage} />
     </Switch>
   </Router>,

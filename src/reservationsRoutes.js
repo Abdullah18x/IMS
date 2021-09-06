@@ -9,14 +9,14 @@ const reservationsRoutes = [
     name: "Add Reservation",
     icon: AddCircle,
     component: AddReservation,
-    layout: "/Dashboard",
+    layout: "/pmm",
   },
   {
     path: "/showReservations",
     name: "View",
     icon: Visibility,
     component: ShowReservations,
-    layout: "/Dashboard",
+    layout: "/pmm",
   },
   
 ];

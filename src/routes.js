@@ -15,7 +15,7 @@ const dashboardRoutes = [
     name: "Dashboard",
     icon: Dashboard,
     component: DashboardPage,
-    layout: "/Dashboard",
+    layout: "/pmm",
   },
   {
     name: "Orders",
@@ -40,14 +40,14 @@ const dashboardRoutes = [
     name: "Change Password",
     icon: Lock,
     component: ChangePass,
-    layout: "/Dashboard",
+    layout: "/pmm",
   },
   {
     path: "/support",
     name: "Support",
     icon: Mail,
     component: Support,
-    layout: "/Dashboard",
+    layout: "/pmm",
   },
 ];
 

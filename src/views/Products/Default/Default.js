@@ -180,16 +180,34 @@ export default function DefaultOrderTemplate(props) {
                               </td>
                             );
                           })}
-                          <td>
-                            <Button size="sm" variant="success">
-                              Reserve Now
-                            </Button>{" "}
-                          </td>
+                          {prop.status ? (
+                            prop.status === "Enabled" ? (
+                              <td>
+                                <Button size="sm" variant="danger">
+                                  Disable
+                                </Button>{" "}
+                              </td>
+                            ) : (
+                              <td>
+                                <Button size="sm" variant="success">
+                                  Enable
+                                </Button>{" "}
+                              </td>
+                            )
+                          ) : null}
+                          {prop.status ? null : (
+                            <td>
+                              <Button size="sm" variant="success">
+                                Reserve Now
+                              </Button>{" "}
+                            </td>
+                          )}
+
                           <td>
                             <Link
                               className="btn btn-success btn-sm"
                               to={{
-                                pathname: "/Dashboard/product",
+                                pathname: "/pmm/productPage",
                                 state: { fromDashboard: true },
                               }}
                             >

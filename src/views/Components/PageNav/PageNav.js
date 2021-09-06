@@ -38,7 +38,7 @@ const allRoutes = routes
 const switchRoutes = (
   <Switch>
     {allRoutes.map((prop, key) => {
-      if (prop.layout === "/Dashboard") {
+      if (prop.layout === "/pmm") {
         return (
           <Route
             path={prop.layout + prop.path}
@@ -49,9 +49,9 @@ const switchRoutes = (
       }
       return null;
     })}
-    <Route path="/Dashboard/profile" component={Profile} />
-    <Route path="/Dashboard/orderPage" component={OrderSingle} />
-    <Route path="/Dashboard/productPage" component={ProductSingle} />
+    <Route path="/pmm/profile" component={Profile} />
+    <Route path="/pmm/orderPage" component={OrderSingle} />
+    <Route path="/pmm/productPage" component={ProductSingle} />
 
     {/* <Redirect from="/admin" to="/admin/dashboard" /> */}
   </Switch>

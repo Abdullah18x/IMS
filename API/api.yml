@@ -1,0 +1,181 @@
+openapi: 3.0.0
+info:
+  title: AMZ API
+  version: 1.0.0
+  description: API For AMZ Dashboard
+servers:
+  - url: "/api"
+    description: Server For AMZ Dashboard
+
+#Paths for PMM
+
+# components:
+#   securitySchemes:
+#     bearerAuth:
+#       type: http
+#       scheme: bearer
+#       bearerFormat: JWT
+
+paths:
+  /addPmm:
+    post:
+      tags:
+        - Admin
+      summary: Adding a PMM
+      description: Add a PMM
+      operationId: insertPmm
+      requestBody:
+        description: Get User details
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - firstName
+                - lastName
+                - age
+                - email
+                - password
+              properties:
+                firstName:
+                  type: string
+                lastName:
+                  type: string
+                email:
+                  type: string
+                age:
+                  type: number
+                password:
+                  type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            "application/json": {}
+
+  /test:
+    get:
+      tags:
+        - Test
+      summary: Get test Response
+      description: this is test request
+      security:
+        - access: ["pmmAuth"]
+      operationId: test
+      responses:
+        "200":
+          description: OK
+          content:
+            "application/json": {}
+
+  /loginPmm:
+    post:
+      tags:
+        - PMM
+      summary: Get test Response
+      description: this is test request
+      operationId: loginPMM
+      requestBody:
+        description: Get user credentials
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - email
+                - password
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+
+      responses:
+        "200":
+          description: OK
+          content:
+            "application/json": {}
+
+  /getPmm:
+    post:
+      tags:
+        - PMM
+      summary: Get PMM
+      description: this is to fetch PMM details
+      security:
+        - access: ["pmmAuth"]
+      operationId: getUser
+      requestBody:
+        description: Get user details
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - id
+              properties:
+                id:
+                  type: number
+
+      responses:
+        "200":
+          description: OK
+          content:
+            "application/json": {}
+
+  /updatePmm:
+    patch:
+      tags:
+        - PMM
+      summary: Update PMM
+      description: this is to update PMM details
+      security:
+        - access: ["pmmAuth"]
+      operationId: updateUser
+      requestBody:
+        description: Get user details
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - id
+              properties:
+                id:
+                  type: number
+
+      responses:
+        "200":
+          description: OK
+          content:
+            "application/json": {}
+
+  /deletePmm:
+    patch:
+      tags:
+        - Admin
+      summary: Deletes PMM
+      description: this is to delete PMM details
+      operationId: updateUser
+      requestBody:
+        description: Delete PMM
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - id
+              properties:
+                id:
+                  type: number
+
+      responses:
+        "200":
+          description: OK
+          content:
+            "application/json": {}
