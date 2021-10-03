@@ -3,16 +3,16 @@
 /* eslint-disable no-unused-vars */
 
 const jwt = require("jsonwebtoken");
-const db = require("../models");
+const { PmmTokens } = require("../models"); 
 
 exports.generateToken = async (userId, email) => {
   let token = jwt.sign({ email: email }, "amzdsk");
-  await db.pmmTokens.destroy({ where: { PmmId: userId } });
+  await PmmTokens.destroy({ where: { PmmId: userId } });
   let userToken = {
     PmmId: userId,
     token: token,
   };
-  let genToken = await db.pmmTokens
+  let genToken = await PmmTokens
     .create(userToken)
     .then((data) => {
       return data.token;

@@ -27,6 +27,8 @@ import styles from "assets/jss/material-dashboard-react/layouts/adminStyle.js";
 import bgImage from "assets/img/sidebar-2.jpeg";
 import logo from "assets/img/reactlogo.png";
 import { useRouteName } from "hooks";
+let axios = require("../../../axios/Pmm.axios");
+let ls = require("local-storage");
 
 let ps;
 
@@ -66,6 +68,7 @@ export default function Admin({ ...rest }) {
   const mainPanel = React.createRef();
   // states and functions
   const [mobileOpen, setMobileOpen] = React.useState(false);
+  const [authorized, setAuthorized] = React.useState(false);
 
   const routeName = useRouteName();
 
@@ -80,26 +83,55 @@ export default function Admin({ ...rest }) {
       setMobileOpen(false);
     }
   };
+
+  const authorizeUser = async () => {
+    let id = ls.get("id");
+    let user = ls.get("user");
+    let token = ls.get("token");
+
+    if (id == null || user == null || token == null || user != "Pmm") {
+      setAuthorized(false)
+      window.location.href = "http://localhost:3005/";
+    } else {
+      let verifySessionToken = await axios.verifySessionToken();
+      if (verifySessionToken.success) {
+        setAuthorized(true)
+        console.log(verifySessionToken.success);
+      } else {
+        setAuthorized(false)
+        window.location.href = "http://localhost:3005/";
+      }
+    }
+  };
   // initialize and destroy the PerfectScrollbar plugin
   React.useEffect(() => {
-    if (navigator.platform.indexOf("Win") > -1) {
-      ps = new PerfectScrollbar(mainPanel.current, {
-        suppressScrollX: true,
-        suppressScrollY: false,
-      });
-      document.body.style.overflow = "hidden";
-    }
-    window.addEventListener("resize", resizeFunction);
-    // Specify how to clean up after this effect:
-    return function cleanup() {
+    if(authorized){
       if (navigator.platform.indexOf("Win") > -1) {
-        ps.destroy();
+        ps = new PerfectScrollbar(mainPanel.current, {
+          suppressScrollX: true,
+          suppressScrollY: false,
+        });
+        document.body.style.overflow = "hidden";
       }
-      window.removeEventListener("resize", resizeFunction);
-    };
+      window.addEventListener("resize", resizeFunction);
+      // Specify how to clean up after this effect:
+      return function cleanup() {
+        if (navigator.platform.indexOf("Win") > -1) {
+          ps.destroy();
+        }
+        window.removeEventListener("resize", resizeFunction);
+      };
+    }
+    
   }, [mainPanel]);
+
+  //authorization
+  React.useEffect(() => {
+    authorizeUser();
+  });
   return (
-    <div className={classes.wrapper}>
+    authorized ? (
+      <div className={classes.wrapper}>
       <Sidebar
         routes={routes}
         logoText={"PMS"}
@@ -128,5 +160,7 @@ export default function Admin({ ...rest }) {
         )}
       </div>
     </div>
+    ): null
+    
   );
 }

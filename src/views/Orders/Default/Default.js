@@ -13,14 +13,13 @@ import Table from "react-bootstrap/Table";
 import Image from "react-bootstrap/Image";
 import SearchBar from "material-ui-search-bar";
 import { Link } from "react-router-dom";
-import image from'../../../assets/img/apple-icon.png'
+import image from "../../../assets/img/apple-icon.png";
 
 // import Icon from "@material-ui/core/Icon";
 
 import styles from "assets/jss/material-dashboard-react/views/dashboardStyle.js";
 import AllOrders from "../AllOrders/AllOrders";
 import { propTypes } from "react-bootstrap/esm/Image";
-
 
 // const useStyles = makeStyles(styles);
 const useCustomStyles = makeStyles({
@@ -49,6 +48,11 @@ export default function DefaultOrderTemplate(props) {
     // });
     // setRows(filteredRows);
   };
+
+  // React.useEffect(() => {
+  //   updatetbData(tData)
+  //   console.log(tbData)
+  // })
 
   const cancelSearch = () => {
     setSearched("");
@@ -99,7 +103,14 @@ export default function DefaultOrderTemplate(props) {
               {tData === undefined || tData === null ? (
                 <h3>No Data Found</h3>
               ) : (
-                <Table striped bordered hover responsive size="sm" style={{textAlign:"center"}}>
+                <Table
+                  striped
+                  bordered
+                  hover
+                  responsive
+                  size="sm"
+                  style={{ textAlign: "center" }}
+                >
                   <thead>
                     <tr>
                       {tHeads.map((value, key) => {
@@ -109,33 +120,35 @@ export default function DefaultOrderTemplate(props) {
                   </thead>
                   <tbody>
                     {tData.map((prop, key) => {
-                      let propValues = Object.values(prop);
-                      console.log(propValues);
                       return (
                         <tr key={key}>
-                          {propValues.map((prop2, key) => {
-                            return prop2.toLowerCase().includes("jpeg") ||
-                              prop2.toLowerCase().includes("jpg") ||
-                              prop2.toLowerCase().includes("png") ? (
-                                <td style={{textAlign:"center"}}>
-                                  <Image src={`../imgs/${prop2}`} rounded  style={{width:"50px", height:"50px"}}/>
-                                </td>
-                              
-                            ) : (
-                              <td key={key}>{prop2}</td>
-                            );
-                          })}
+                          <td>{prop.id}</td>
+                          <td>{prop.Pm.name}</td>
+                          <td>{prop.orderNumber}</td>
+                          <td style={{ textAlign: "center" }}>
+                            <Image
+                              src={`../imgs/${prop.Product.picture}`}
+                              rounded
+                              style={{ width: "50px", height: "50px" }}
+                            />
+                          </td>
+                          <td>{prop.customerEmail}</td>
+                          <td>{prop.market}</td>
+                          <td>{prop.createdAt}</td>
+                          <td>{prop.OrderStatus.status}</td>
                           <td>
                             <Link
                               className="btn btn-success btn-sm"
                               to={{
-                                pathname: "/Dashboard/product",
-                                state: { fromDashboard: true },
+                                pathname: "/pmm/orderPage",
+                                state: {
+                                  fromDashboard: true,
+                                  orderId: prop.id,
+                                },
                               }}
                             >
                               View
                             </Link>
-                            {/* <Button size="sm" variant="success">Success</Button>{" "} */}
                           </td>
                         </tr>
                       );
@@ -154,5 +167,5 @@ export default function DefaultOrderTemplate(props) {
 DefaultOrderTemplate.propTypes = {
   tHeads: PropTypes.arrayOf(PropTypes.string),
   tData: PropTypes.arrayOf(PropTypes.object),
-  page: PropTypes.string
+  page: PropTypes.string,
 };

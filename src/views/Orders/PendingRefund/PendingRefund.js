@@ -10,6 +10,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import PendingRefund from "../Default/Default"
 // import Icon from "@material-ui/core/Icon";
+import {getOrdersByStatus} from "../../../axios/Pmm.axios"
 
 import styles from "assets/jss/material-dashboard-react/views/dashboardStyle.js";
 
@@ -25,30 +26,17 @@ export default function AllOrders() {
   const classes = useStyles();
   const classes2 = useCustomStyles();
   let heads=['#','User','Order Number','Product','Customer Email','Market','Create Date', 'Status', 'Action']
-  let data=[
-    {
-      no:'1',
-      User:'Abdullah',
-      orderNumber:'114-4507983-9321039',
-      Product:'apple-icon.png',
-      customerEmail:'abcd@gmail.com',
-      market:'USA',
-      createDate:'23 june', 
-      status:'available', 
+  var [data,setData] = React.useState([])
+  
+  
 
-    },
-    {
-      no:'2',
-      User:'Abdullah',
-      orderNumber:'114-4507983-9321039',
-      Product:'profile-bg.jpg',
-      customerEmail:'abcd@gmail.com',
-      market:'USA',
-      createDate:'23 june', 
-      status:'available', 
-
-    }
-  ]
+  React.useEffect(async () => {
+    await getOrdersByStatus(3)
+    .then((orders) => {
+      setData([...orders])
+    })
+    
+  },[])
   return (
     <PendingRefund 
     page="Pending Refund"

@@ -194,7 +194,7 @@ export default function AdminNavbarLinks() {
               <Paper>
                 <ClickAwayListener onClickAway={handleCloseProfile}>
                   <MenuList role="menu">
-                    <NavLink to="/Dashboard/profile">
+                    <NavLink to="/pmm/profile">
                       <MenuItem
                         className={classes.dropdownItem}
                         onMouseEnter={(e) =>
