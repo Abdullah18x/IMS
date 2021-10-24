@@ -20,7 +20,6 @@ exports.getAllReservations = async (req, res) => {
   try {
     let body = req.body;
     let reservation = await Reservation.findAll({
-        logging:console.log, 
         where: body,
         include: [
             {
