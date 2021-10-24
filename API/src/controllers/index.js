@@ -4,7 +4,9 @@
 
 const controllers = {
     ...require('./pmm.controller'),
-    ...require('./orders.controller')
+    ...require('./orders.controller'),
+    ...require('./products.controller'),
+    ...require('./reservations.controller')
 }
 
 module.exports = controllers

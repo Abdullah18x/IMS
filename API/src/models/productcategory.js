@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate({Product}) {
       // define association here
-      this.belongsTo(Product)
+      this.hasMany(Product)
     }
   };
   ProductCategory.init({

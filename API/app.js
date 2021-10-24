@@ -8,6 +8,8 @@ const cors = require('cors');
 const YAML = require("yamljs");
 const { connector } = require("swagger-routes-express");
 const swaggerUi = require('swagger-ui-express');
+// const fs = require('fs');
+// const dir = '/uploads';
 
 //Import Swagger Config
 const options = require('./src/config/swaggerConfig')
@@ -21,6 +23,7 @@ const port = 3010;
 app.use(cors())
 app.set('trust proxy', 1)
 app.use(express.json());
+app.use(express.static('uploads'));
 
 
 //Route Handling
@@ -34,6 +37,11 @@ db.sequelize.authenticate();
 //Connect App with YAML File
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(apiDefinition));
 connect(app);
+
+//Creating necessary folders
+// if (!fs.existsSync(dir)){
+//   fs.mkdirSync(dir);
+// }
 
 //Listen Port
 app.listen(port, () => {

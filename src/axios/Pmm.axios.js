@@ -9,7 +9,7 @@ let user = ls.get('user')
 let token = ls.get('token')
 
 let loginPmm = async (email, password) => {
-  let user = await axios
+  let userR = await axios
     .post(`${address}/loginPmm`, {
       email: email,
       password: password,
@@ -22,7 +22,7 @@ let loginPmm = async (email, password) => {
       return error;
     });
 
-  return user;
+  return userR;
 };
 
 let verifySessionToken = async () => {
@@ -95,5 +95,5 @@ export {
   loginPmm, 
   verifySessionToken,
   getAllOrders,
-  getOrdersByStatus
+  getOrdersByStatus,
 };

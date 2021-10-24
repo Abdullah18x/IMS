@@ -8,6 +8,7 @@ servers:
     description: Server For AMZ Dashboard
 
 #Paths for PMM
+
 paths:
   /addPmm:
     post:
@@ -24,20 +25,21 @@ paths:
             schema:
               type: object
               required:
-                - firstName
-                - lastName
-                - age
+                - username
                 - email
+                - name
                 - password
               properties:
-                firstName:
-                  type: string
-                lastName:
+                username:
                   type: string
                 email:
                   type: string
-                age:
+                name:
+                  type: string
+                facebookLink:
                   type: number
+                whatsAppNumber:
+                  type: string
                 password:
                   type: string
       responses:
@@ -204,3 +206,213 @@ paths:
           content:
             "application/json": {}
 
+  /addProduct:
+    post:
+      tags:
+        - Products
+      summary: Add Product
+      description: this is to add Product
+      security:
+        - access: ["pmmAuth"]
+      operationId: addProduct
+      requestBody:
+        description: Get User details
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Product"
+      responses:
+        "200":
+          description: OK
+          content:
+            "application/json": {}
+  /updateProductImage:
+    post:
+      tags:
+        - Products
+      summary: Add Product image
+      description: this is to add Product image
+      security:
+        - access: ["pmmAuth"]
+      x-middleware:
+        - uploadFile
+      operationId: updateProductImage
+      requestBody:
+        description: Get Product Image
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: number
+                imageForUpload:
+                  type: string
+                  format: binary
+      responses:
+        "200":
+          description: OK
+          content:
+            "application/json": {}
+
+  /getAllProducts:
+    post:
+      tags:
+        - Products
+      summary: Get Products
+      description: this is to fetch Products
+      security:
+        - access: ["pmmAuth"]
+      operationId: getAllProducts
+      requestBody:
+        description: Get Products
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id: 
+                  type: number
+                ProductcategoryId: 
+                  type: number
+      responses:
+        "200":
+          description: OK
+          content:
+            "application/json": {}
+
+  /getProductsByStatus:
+    post:
+      tags:
+        - Products
+      summary: Get Product Categories
+      description: this is to fetch Product Categories
+      security:
+        - access: ["pmmAuth"]
+      operationId: getAllProducts
+      requestBody:
+        description: Get User details
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id: 
+                  type: number
+                status: 
+                  type: boolean
+      responses:
+        "200":
+          description: OK
+          content:
+            "application/json": {}
+
+  /getProductsByCategory:
+    post:
+      tags:
+        - Products
+      summary: Get Product by Categories
+      description: this is to fetch Product by Categories
+      security:
+        - access: ["pmmAuth"]
+      operationId: getAllProducts
+      requestBody:
+        description: Get Products
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id: 
+                  type: number
+                ProductcategoryId: 
+                  type: number
+      responses:
+        "200":
+          description: OK
+          content:
+            "application/json": {}
+
+  /getProductCategories:
+    get:
+      tags:
+        - Products
+      summary: Get Product Categories
+      description: this is to fetch Product Categories
+      operationId: getProductCategories
+
+      responses:
+        "200":
+          description: OK
+          content:
+            "application/json": {}
+
+  /getAllReservations:
+    post:
+      tags:
+        - Reservations
+      summary: Get Reservations
+      description: this is to fetch Reservations
+      security:
+        - access: ["pmmAuth"]
+      operationId: getAllReservations
+      requestBody:
+        description: Get Reservations
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                PmmId: 
+                  type: number
+      responses:
+        "200":
+          description: OK
+          content:
+            "application/json": {}
+
+components:
+  schemas:
+    Product:
+      type: object
+      properties:
+        PmmId:
+          type: number
+        keyword:
+          type: string
+        brandName:
+          type: string
+        soldBy:
+          type: string
+        market:
+          type: string
+        chineseSeller:
+          type: string
+        commission:
+          type: number
+        pmnlCommission:
+          type: number
+        dailySaleLimit:
+          type: number
+        overallSaleLimit:
+          type: number
+        ProductcategoryId:
+          type: number
+        instructions:
+          type: string
+        refundCondition:
+          type: string
+        commissionCondition:
+          type: string
+        picture:
+          type: string
+        amazonPicture:
+          type: string
+        status:
+          type: boolean

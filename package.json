@@ -11,6 +11,7 @@
     "axios": "^0.21.4",
     "bootstrap": "^5.0.2",
     "classnames": "2.3.1",
+    "form-data": "^4.0.0",
     "local-storage": "^2.0.0",
     "material-ui-search-bar": "^1.0.0",
     "moment": "2.29.1",
@@ -43,7 +44,7 @@
     "typescript": "4.2.4"
   },
   "scripts": {
-    "start": "set PORT=3005 && react-scripts start",
+    "start": "export PORT=3005 && react-scripts start",
     "build": "react-scripts build && gulp licenses",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",

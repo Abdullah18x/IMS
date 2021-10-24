@@ -6,6 +6,6 @@ module.exports = {
         pmmAuth: pmmAuth.authPmm
     },
     middleware: {
-        uploadFile: uploadFile.single('referenceFile')
+        uploadFile: uploadFile.single('imageForUpload')
     }
 }

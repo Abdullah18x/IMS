@@ -4,7 +4,6 @@
 import React, { useState } from "react";
 import PropTypes, { object } from "prop-types";
 import GridContainer from "components/Grid/GridContainer.js";
-import GridItem from "components/Grid/GridItem.js";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "react-bootstrap/Card";
 import Row from "react-bootstrap/Row";
@@ -13,15 +12,7 @@ import Table from "react-bootstrap/Table";
 import Image from "react-bootstrap/Image";
 import SearchBar from "material-ui-search-bar";
 import { Link } from "react-router-dom";
-import image from "../../../assets/img/apple-icon.png";
 
-// import Icon from "@material-ui/core/Icon";
-
-import styles from "assets/jss/material-dashboard-react/views/dashboardStyle.js";
-import AllOrders from "../AllOrders/AllOrders";
-import { propTypes } from "react-bootstrap/esm/Image";
-
-// const useStyles = makeStyles(styles);
 const useCustomStyles = makeStyles({
   a1: {
     width: "100%",
@@ -38,7 +29,6 @@ const useCustomStyles = makeStyles({
   },
 });
 export default function DefaultOrderTemplate(props) {
-  //   const classes = useStyles();
   const [searched, setSearched] = useState("");
   const { tHeads, tData, page } = props;
   const classes = useCustomStyles();

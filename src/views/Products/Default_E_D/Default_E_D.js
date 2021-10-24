@@ -160,55 +160,83 @@ export default function DefaultOrderTemplate(props) {
                   </thead>
                   <tbody>
                     {tData.map((prop, key) => {
-                      let propValues = Object.values(prop);
-                      return (
+                      console.log(prop.status);
+                      let status = 'Disabled'
+                      if (prop.status === true) {
+                        status = 'Enabled'
+                      }
+                      return prop.status === false ? (
                         <tr key={key}>
-                          {propValues.map((prop2, key) => {
-                            return prop2.toLowerCase().includes("jpeg") ||
-                              prop2.toLowerCase().includes("jpg") ||
-                              prop2.toLowerCase().includes("png") ? (
-                              <td style={{ textAlign: "center" }}>
-                                <Image
-                                  src={`../imgs/${prop2}`}
-                                  rounded
-                                  style={{ width: "50px", height: "50px" }}
-                                />
-                              </td>
-                            ) : (
-                              <td className={classes.tableData} key={key}>
-                                {prop2}
-                              </td>
-                            );
-                          })}
-                          {prop.status ? (
-                            prop.status === "Enabled" ? (
-                              <td>
-                                <Button size="sm" variant="danger">
-                                  Disable
-                                </Button>{" "}
-                              </td>
-                            ) : (
-                              <td>
-                                <Button size="sm" variant="success">
-                                  Enable
-                                </Button>{" "}
-                              </td>
-                            )
-                          ) : null}
-                          {prop.status ? null : (
-                            <td>
-                              <Button size="sm" variant="success">
-                                Reserve Now
-                              </Button>{" "}
-                            </td>
-                          )}
+                          <td>name</td>
+                          <td>{prop.market}</td>
+                          <td>{prop.dailySaleLimit}</td>
+                          <td>{prop.dailySaleLimit}</td>
+                          <td>{prop.overallSaleLimit}</td>
+                          <td>{prop.commission}</td>
+                          <td>{prop.keyword}</td>
+                          <td>{prop.id}</td>
+                          <td style={{ textAlign: "center" }}>
+                            <Image
+                              src={'http://localhost:3010/'+prop.picture}
+                              rounded
+                              style={{ width: "50px", height: "50px" }}
+                            />
+                          </td>
+                          <td>{status}</td>
+                          <td>
+                            <Button size="sm" variant="success">
+                              Enable
+                            </Button>{" "}
+                          </td>
 
                           <td>
                             <Link
                               className="btn btn-success btn-sm"
                               to={{
-                                pathname: "/pmm/productPage",
-                                state: { fromDashboard: true },
+                                pathname: "/pmm/orderPage",
+                                state: {
+                                  fromDashboard: true,
+                                  orderId: prop.id,
+                                },
+                              }}
+                            >
+                              View
+                            </Link>
+                          </td>
+                        </tr>
+                      ) : (
+                        <tr key={key}>
+                          <td>name</td>
+                          <td>{prop.market}</td>
+                          <td>{prop.dailySaleLimit}</td>
+                          <td>{prop.dailySaleLimit}</td>
+                          <td>{prop.overallSaleLimit}</td>
+                          <td>{prop.commission}</td>
+                          <td>{prop.keyword}</td>
+                          <td>{prop.id}</td>
+                          <td style={{ textAlign: "center" }}>
+                            <Image
+                              src={'http://localhost:3010/'+prop.picture}
+                              rounded
+                              style={{ width: "50px", height: "50px" }}
+                            />
+                          </td>
+                          <td>{status}</td>
+                          <td>
+                            <Button size="sm" variant="danger">
+                              Disable
+                            </Button>{" "}
+                          </td>
+
+                          <td>
+                            <Link
+                              className="btn btn-success btn-sm"
+                              to={{
+                                pathname: "/pmm/orderPage",
+                                state: {
+                                  fromDashboard: true,
+                                  orderId: prop.id,
+                                },
                               }}
                             >
                               View

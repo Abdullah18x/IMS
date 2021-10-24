@@ -1,10 +1,9 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable no-unused-vars */
 /* eslint-disable prettier/prettier */
-import React, { useState } from "react";
+import React from "react";
 import PropTypes, { object } from "prop-types";
 import GridContainer from "components/Grid/GridContainer.js";
-import GridItem from "components/Grid/GridItem.js";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "react-bootstrap/Card";
 import Row from "react-bootstrap/Row";
@@ -13,9 +12,6 @@ import TextField from "@material-ui/core/TextField";
 import Button from "react-bootstrap/Button";
 import Image from 'react-bootstrap/Image'
 
-// import Icon from "@material-ui/core/Icon";
-
-// const useStyles = makeStyles(styles);
 const useCustomStyles = makeStyles((theme) =>( {
   a1: {
     width: "100%",
@@ -40,6 +36,22 @@ export default function DefaultChangePassTemplate(props) {
   const { tHeads, tData, page } = props;
   const classes = useCustomStyles();
 
+  let [oldPass, setOldPass] = React.useState('')
+  let [newPass, setNewPass] = React.useState('')
+  let [repeatNewPass, setRepeatNewPass] = React.useState('')
+
+  const setNewPassword = async () => {
+    if (oldPass != newPass) {
+      if (newPass != repeatNewPass) {
+        alert('New passwords do not match');
+        return;
+      }
+      alert('Pass changed');
+    } else {
+      alert('Old pass and New Pass can not be the same');
+    } 
+  }
+
   return (
     <GridContainer>
       <Row className={"page-header no-gutters " + classes.a2}>
@@ -63,6 +75,7 @@ export default function DefaultChangePassTemplate(props) {
                     variant="outlined"
                     placeholder="Old Password"
                     style={{ width: "100%", marginRight: "20px" }}
+                    onChange={e => setOldPass(e.target.value)}
                   />
                 </Col>
                 
@@ -74,6 +87,7 @@ export default function DefaultChangePassTemplate(props) {
                     variant="outlined"
                     placeholder="New Password"
                     style={{ width: "100%", marginRight: "20px" }}
+                    onChange={e => setNewPass(e.target.value)}
                   />
                 </Col>
                 
@@ -85,13 +99,14 @@ export default function DefaultChangePassTemplate(props) {
                     variant="outlined"
                     placeholder="Repeat New Password"
                     style={{ width: "100%", marginRight: "20px" }}
+                    onChange={e => setRepeatNewPass(e.target.value)}
                   />
                 </Col>
                 
               </Row>
               <Row style={{marginTop:"2%"}}>
               <Col sm={2} md={2}>
-                  <Button type="button" className=" btn-success" size="lg">
+                  <Button type="button" className=" btn-success" size="lg" onClick={setNewPassword}>
                     Update
                   </Button>
                 </Col>

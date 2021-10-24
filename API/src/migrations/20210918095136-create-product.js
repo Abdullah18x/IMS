@@ -33,6 +33,9 @@ module.exports = {
       commission: {
         type: Sequelize.INTEGER
       },
+      pmnlCommission: {
+        type: Sequelize.INTEGER
+      },
       chineseSeller: {
         type: Sequelize.STRING
       },

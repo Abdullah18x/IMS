@@ -1,9 +1,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable prettier/prettier */
-'use strict';
-const {
-  Model
-} = require('sequelize');
+"use strict";
+const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class Product extends Model {
     /**
@@ -11,70 +9,77 @@ module.exports = (sequelize, DataTypes) => {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
-    static associate({Pmm,ProductCategory,Order}) {
+    static associate({ Pmm, ProductCategory, Order, Reservation }) {
       // define association here
-      this.belongsTo(Pmm)
-      this.hasMany(ProductCategory)
-      this.hasMany(Order)
+      this.belongsTo(Pmm);
+      this.belongsTo(ProductCategory);
+      this.hasMany(Reservation);
+      this.hasMany(Order);
     }
-  };
-  Product.init({
-    keyword: {
-      type: DataTypes.STRING
+  }
+  Product.init(
+    {
+      keyword: {
+        type: DataTypes.STRING,
+      },
+      PmmId: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
+      soldBy: {
+        type: DataTypes.STRING,
+      },
+      brandName: {
+        type: DataTypes.STRING,
+      },
+      market: {
+        type: DataTypes.STRING,
+      },
+      ProductcategoryId: {
+        type: DataTypes.INTEGER,
+      },
+      commission: {
+        type: DataTypes.INTEGER,
+      },
+      pmnlCommission: {
+        type: DataTypes.INTEGER,
+      },
+      chineseSeller: {
+        type: DataTypes.STRING,
+      },
+      sellerName: {
+        type: DataTypes.STRING,
+      },
+      instructions: {
+        type: DataTypes.STRING,
+      },
+      refundCondition: {
+        type: DataTypes.STRING,
+      },
+      commissionCondition: {
+        type: DataTypes.STRING,
+      },
+      overallSaleLimit: {
+        type: DataTypes.INTEGER,
+      },
+      dailySaleLimit: {
+        type: DataTypes.INTEGER,
+      },
+      picture: {
+        type: DataTypes.STRING,
+      },
+      amazonPicture: {
+        type: DataTypes.STRING,
+      },
+      status: {
+        defaultValue: 0,
+        type: DataTypes.BOOLEAN,
+      },
     },
-    PmmId: {
-      type: DataTypes.INTEGER,
-      allowNull: false
-    },
-    soldBy: {
-      type: DataTypes.STRING
-    },
-    brandName: {
-      type: DataTypes.STRING
-    },
-    market: {
-      type: DataTypes.STRING
-    },
-    ProductcategoryId: {
-      type: DataTypes.INTEGER
-    },
-    commission: {
-      type: DataTypes.INTEGER
-    },
-    chineseSeller: {
-      type: DataTypes.STRING
-    },
-    sellerName: {
-      type: DataTypes.STRING
-    },
-    instructions: {
-      type: DataTypes.STRING
-    },
-    refundCondition: {
-      type: DataTypes.STRING
-    },
-    commissionCondition: {
-      type: DataTypes.STRING
-    },
-    overallSaleLimit: {
-      type: DataTypes.INTEGER
-    },
-    dailySaleLimit: {
-      type: DataTypes.INTEGER
-    },
-    picture: {
-      type: DataTypes.STRING
-    },
-    amazonPicture: {
-      type: DataTypes.STRING
-    },
-    status:{
-      defaultValue:0,
-      type:DataTypes.BOOLEAN
+    {
+      sequelize,
+      modelName: "Product",
     }
-  }, {
-    sequelize,
-    modelName: 'Product',
-  });
+  );
   return Product;
 };

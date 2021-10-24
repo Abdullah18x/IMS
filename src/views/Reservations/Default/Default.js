@@ -4,14 +4,13 @@
 import React, { useState } from "react";
 import PropTypes, { object } from "prop-types";
 import GridContainer from "components/Grid/GridContainer.js";
-import GridItem from "components/Grid/GridItem.js";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "react-bootstrap/Card";
+import Button from "react-bootstrap/Button";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Table from "react-bootstrap/Table";
 import Image from "react-bootstrap/Image";
-import SearchBar from "material-ui-search-bar";
 import { Link } from "react-router-dom";
 
 const useCustomStyles = makeStyles({
@@ -81,25 +80,20 @@ export default function DefaultOrderTemplate(props) {
                   </thead>
                   <tbody>
                     {tData.map((prop, key) => {
-                      let propValues = Object.values(prop);
-                      console.log(propValues);
                       return (
                         <tr key={key}>
-                          {propValues.map((prop2, key) => {
-                            return prop2.toLowerCase().includes("jpeg") ||
-                              prop2.toLowerCase().includes("jpg") ||
-                              prop2.toLowerCase().includes("png") ? (
-                              <td style={{ textAlign: "center" }}>
-                                <Image
-                                  src={`../imgs/${prop2}`}
-                                  rounded
-                                  style={{ width: "50px", height: "50px" }}
-                                />
-                              </td>
-                            ) : (
-                              <td key={key}>{prop2}</td>
-                            );
-                          })}
+                          <td>{prop.id}</td>
+                          <td>{prop.Pm.name}</td>
+                          <td>{prop.Product.id}</td>
+                          <td>{prop.createdAt}</td>
+                          <td style={{ textAlign: "center" }}>
+                            <Image
+                              src={'http://localhost:3010/'+prop.Product.picture}
+                              rounded
+                              style={{ width: "50px", height: "50px" }}
+                            />
+                          </td>
+                          <td><Button size="sm" variant="success" type="button">Create</Button>{" "}</td>
                           <td>
                             <Link
                               className="btn btn-success btn-sm"
@@ -110,7 +104,6 @@ export default function DefaultOrderTemplate(props) {
                             >
                               View
                             </Link>
-                            {/* <Button size="sm" variant="success">Success</Button>{" "} */}
                           </td>
                         </tr>
                       );

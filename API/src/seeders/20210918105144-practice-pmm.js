@@ -10,7 +10,7 @@ module.exports = {
       name:'Abdullah Akram',
       facebookLink:'www.facebook.com',
       whatsAppNumber:'03000000000',
-      password:'$2a$10$ExpaXFkitfKnEcTNuXtIseD0N.YFucHwp04LP7zGq24lo.71UKBHG'
+      password:'$2a$10$9PpAFn14lriAVBG3Wgri6upJEHwR0JDiJey67zVliFHZPwdUPSrIe'
 
     }
   ], {});

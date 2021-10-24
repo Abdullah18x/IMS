@@ -8,11 +8,12 @@ module.exports = (sequelize, DataTypes) => {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
-    static associate({PmmTokens,Order,Product}) {
+    static associate({PmmTokens,Order,Product,Reservation}) {
       // define association here
       this.hasMany(PmmTokens)
       this.hasMany(Order)
       this.hasMany(Product)
+      this.hasMany(Reservation)
     }
   }
   Pmm.init(
